@@ -1,6 +1,6 @@
 <template>
   <div id="usefultoolsHeader">
-    <h2>Working</h2>
+    <h2 id="title">Usefultools.com</h2>
   </div>
 </template>
 
@@ -12,6 +12,8 @@ export default {
 
 <style scoped>
   #usefultoolsHeader{
-    border: solid black
+    background-color: blueviolet;
+    margin: 0 auto;
+    padding:0
   }
 </style>
