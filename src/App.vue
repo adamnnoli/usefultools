@@ -22,7 +22,7 @@ export default {
   },
   data: function() {
     return {
-      currentComponent: "calculator"
+      currentComponent: "Calculator"
     };
   },
   methods:{

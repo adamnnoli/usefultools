@@ -1,9 +1,10 @@
 <template>
   <div id="navbar">
-    <h2>Navbar Working</h2>
-    <button v-on:click="switchTo('Calculator')">Calculator</button>
-    <button v-on:click="switchTo('Time Calculator')">Time Calculator</button>
-    <button>Converter</button>
+    <button @click="switchTo('Calculator')">Calculator</button>
+    <button @click="switchTo('Time Calculator')">Time Calculator</button>
+    <button @click="switchTo('Unit Converter')">Unit Converter</button>
+    <button @click="switchTo('Hex Color Picker')">Hex Color Picker</button>
+    <button @click="switchTo('Links')">Links</button>
   </div>
 </template>
 
@@ -21,6 +22,12 @@ export default {
 
 <style scoped>
   #navbar {
+    width: 75%;
+    float: right;
     border: solid green;
+  }
+  button{
+    height:25px;
+    border-radius: 5px
   }
 </style>
