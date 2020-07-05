@@ -1,6 +1,6 @@
 <template>
   <div id="usefultoolsFooter">
-    <h2>Footer Working</h2>
+    <span>About</span>
   </div>
 </template>
 
@@ -12,5 +12,6 @@ export default {
 <style scoped>
 #usefultoolsFooter {
   border: solid blue;
+  height: 77px;
 }
 </style>

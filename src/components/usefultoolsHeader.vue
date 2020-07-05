@@ -12,8 +12,13 @@ export default {
 
 <style scoped>
   #usefultoolsHeader{
-    background-color: blueviolet;
-    margin: 0 auto;
-    padding:0
+    background-color: #9B5DE5;
+    margin: 0;
+    padding:0;
+    height: 77px
+  }
+  #title{
+    margin:5px;
+
   }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <div id="tool">
-    <h2>Tool Component Working</h2>
     <timeCalculator class="innerComponent" v-if="this.currComponent=='Time Calculator'"></timeCalculator>
     <calculator class="innerComponent" v-if="this.currComponent=='Calculator'"></calculator>
     <unitConverter class="innerComponent" v-if="this.currComponent == 'Unit Converter'"></unitConverter>
@@ -35,7 +34,7 @@ export default {
 <style scoped>
 #tool {
   border: solid red;
-  height: 500px;
+  height: 614px;
 }
 .innerComponent {
   height: 90%;

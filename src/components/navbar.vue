@@ -14,7 +14,6 @@ export default {
   methods:{
     switchTo: function(value){
       this.$emit('switch-to',value);
-      console.log("Emitted")
     }
   }
 };
@@ -24,10 +23,14 @@ export default {
   #navbar {
     width: 75%;
     float: right;
-    border: solid green;
+    background-color: #FEE440;
   }
   button{
-    height:25px;
-    border-radius: 5px
+    height:40px;
+    border-top-left-radius: 8px;
+    background-color: #F15BB5;
+    width:20%;
+    margin:0;
+    padding: 0;
   }
 </style>

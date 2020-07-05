@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <usefultoolsHeader></usefultoolsHeader>
+    <usefultoolsHeader ></usefultoolsHeader>
     <navbar v-on:switch-to="changeComponent($event)"></navbar>
     <tool v-bind:currComponent = "currentComponent"></tool>
-    <usefultoolsFooter></usefultoolsFooter>
+    <usefultoolsFooter id="footerDiv"></usefultoolsFooter>
   </div>
 </template>
 
@@ -27,16 +27,12 @@ export default {
   },
   methods:{
     changeComponent: function(newComponent){
-      console.log("Changed components");
       this.currentComponent = newComponent;
-      console.log(newComponent)
     }
   }
 };
 </script>
 
 <style>
-  usefultoolsHeader{
-    margin:0
-  }
+
 </style>
