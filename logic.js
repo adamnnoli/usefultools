@@ -1,15 +1,9 @@
-const calc = {
-
-}
-
-const converter = {
-
-}
-
-const timeCalc = {
-
-}
-
-const colorPicker = {
+class Expression {
+  constructor(exprString){
+    this.exprString = exprString;
+  }
+  eval(){
+    
+  }
 
 }
