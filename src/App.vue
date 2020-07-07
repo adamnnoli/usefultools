@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-    <usefultoolsHeader ></usefultoolsHeader>
-    <navbar v-on:switch-to="changeComponent($event)"></navbar>
-    <tool v-bind:currComponent = "currentComponent"></tool>
+    <usefultoolsHeader></usefultoolsHeader>
+    <div>
+      <navbar v-on:switch-to="changeComponent($event)"></navbar>
+    </div>
+    <div>
+    <tool v-bind:currComponent="currentComponent"></tool>
+    </div>
     <usefultoolsFooter id="footerDiv"></usefultoolsFooter>
   </div>
 </template>
@@ -10,8 +14,8 @@
 <script>
 import usefultoolsHeader from "./components/usefultoolsHeader.vue";
 import navbar from "./components/navbar";
-import tool from "./components/tool"
-import usefultoolsFooter from"./components/usefultoolsFooter";
+import tool from "./components/tool";
+import usefultoolsFooter from "./components/usefultoolsFooter";
 export default {
   name: "App",
   components: {
@@ -25,8 +29,8 @@ export default {
       currentComponent: "Calculator"
     };
   },
-  methods:{
-    changeComponent: function(newComponent){
+  methods: {
+    changeComponent: function(newComponent) {
       this.currentComponent = newComponent;
     }
   }
@@ -34,5 +38,7 @@ export default {
 </script>
 
 <style>
-
+body{
+  margin:0;
+}
 </style>

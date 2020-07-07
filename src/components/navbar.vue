@@ -21,15 +21,14 @@ export default {
 
 <style scoped>
   #navbar {
-    width: 75%;
-    float: right;
     background-color: #FEE440;
+    border: solid green;
   }
   button{
     height:40px;
     border-top-left-radius: 8px;
     background-color: #F15BB5;
-    width:20%;
+    width:19%;
     margin:0;
     padding: 0;
   }

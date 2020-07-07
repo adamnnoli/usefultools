@@ -34,9 +34,8 @@ export default {
 <style scoped>
 #tool {
   border: solid red;
-  height: 614px;
 }
 .innerComponent {
-  height: 90%;
+  margin: auto;
 }
 </style>
