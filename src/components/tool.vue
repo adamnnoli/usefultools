@@ -1,18 +1,24 @@
 <template>
   <div id="tool">
-    <timeCalculator class="innerComponent" v-if="this.currComponent=='Time Calculator'"></timeCalculator>
     <calculator class="innerComponent" v-if="this.currComponent=='Calculator'"></calculator>
+    <timeCalculator class="innerComponent" v-if="this.currComponent=='Time Calculator'"></timeCalculator>
+    <interestCalculator class="innerComponent" v-if="this.currComponent=='Interest Calculator'"></interestCalculator>
+    <fileConverter class="innerComponent" v-if="this.currComponent=='File Converter'"></fileConverter>
     <unitConverter class="innerComponent" v-if="this.currComponent == 'Unit Converter'"></unitConverter>
+    <currencyExchanger class="innerComponent" v-if="this.currComponent=='Currency Exchanger'"></currencyExchanger>
     <hexColorPicker class="innerComponent" v-if="this.currComponent == 'Hex Color Picker'"></hexColorPicker>
     <links class="innerComponent" v-if="this.currComponent == 'Links'"></links>
   </div>
 </template>
 <script>
-import calculator from "./calculator";
-import timeCalculator from "./timeCalculator";
-import unitConverter from "./unitConverter";
-import hexColorPicker from "./hexColorPicker";
-import links from "./links";
+import calculator from "./tools/calculator";
+import timeCalculator from "./tools/timeCalculator";
+import interestCalculator from "./tools/interestCalculator";
+import fileConverter from "./tools/fileConverter";
+import unitConverter from "./tools/unitConverter";
+import currencyExchanger from "./tools/currencyExchanger";
+import hexColorPicker from "./tools/hexColorPicker";
+import links from "./tools/links";
 
 export default {
   name: "tool",
@@ -20,7 +26,10 @@ export default {
   components: {
     calculator,
     timeCalculator,
+    interestCalculator,
+    fileConverter,
     unitConverter,
+    currencyExchanger,
     hexColorPicker,
     links
   },
