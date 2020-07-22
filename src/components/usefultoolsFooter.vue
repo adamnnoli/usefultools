@@ -1,6 +1,7 @@
 <template>
   <div id="usefultoolsFooter">
     <span>About</span>
+    <span>Contact</span>
   </div>
 </template>
 
