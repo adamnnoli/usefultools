@@ -1,3 +1,134 @@
+import { conversions } from "./conversions.js";
+
+const unitTypes = {
+	Length: [
+		"angstrom",
+		"picometer",
+		"nanometer",
+		"micrometer",
+		"millimeter",
+		"centimeter",
+		"meter",
+		"kilometer",
+		"light year",
+		"inch",
+		"foot",
+		"yard",
+		"mile",
+		"nautical mile",
+		"parsec",
+		"astronomical unit",
+	],
+	Area: [
+		"square millimeters",
+		"square centimeters",
+		"square meters",
+		"square kilometers",
+		"square inches",
+		"square feet",
+		"square yards",
+		"square miles",
+		"acres",
+		"hectares",
+	],
+	Volume: [
+		"cc",
+		"milliliter",
+		"liter",
+		"cubic meter",
+		"fluid ounce",
+		"cup",
+		"pint",
+		"quart",
+		"gallon",
+		"cubic inch",
+		"cubic feet",
+		"teaspoon",
+		"tablespoon",
+	],
+	Weight: [
+		"ounce",
+		"pound",
+		"ton",
+		"milligram",
+		"gram",
+		"kilogram",
+		"metric ton",
+		"stone",
+	],
+	Speed: [
+		"meters per second",
+		"kilometers per hour",
+		"miles per hour",
+		"feet per second",
+		"knots",
+	],
+	Energy: [
+		"joule",
+		"kilojoules",
+		"electron volt",
+		"calorie",
+		"kilocalorie",
+		"BTU",
+		"kWh",
+		"MWh",
+		"tonnes of TNT",
+	],
+	Power: ["watts", "kilowatts", "megawatts", "horsepower"],
+	Time: [
+		"millisecond",
+		"seconds",
+		"minutes",
+		"hours",
+		"days",
+		"weeks",
+		"months",
+		"years",
+		"decades",
+		"centuries",
+		"millennia",
+	],
+	Temperature: ["Celsius", "Fahrenheit", "Kelvin", "Rankine"],
+	"Data Transfer Rate": [
+		"bits per second",
+		"bytes per second",
+		"kilobits per second",
+		"kilobytes per second",
+		"megabits per second",
+		"megabytes per second",
+		"gigabits per second",
+		"gigabytes per second",
+		"terabits per second",
+		"terabytes per second",
+		"petabits per second",
+		"petabytes per second",
+		"exabits per second",
+		"exabytes per second",
+	],
+	"Digital Storage": [
+		"bits",
+		"bytes",
+		"kilobits",
+		"kilobytes",
+		"megabits",
+		"megabytes",
+		"gigabits",
+		"gigabytes",
+		"terabits",
+		"terabytes",
+		"petabits",
+		"petabytes",
+		"exabits",
+		"exabytes",
+	],
+	Pressure: ["pascal", "bar", "torr", "atmospheres", "pounds per square inch"],
+	"Fuel Economy": [
+		"miles per gallon",
+		"kilometers per liter",
+		"liters per 100km",
+	],
+};
+
 function futureValueS(principal, i, n) {
 	/**
 	 * Returns the value of principal with a simple interest rate of i per period after n
@@ -7,7 +138,7 @@ function futureValueS(principal, i, n) {
 	 * @param: {float} i, the interest rate per period
 	 * @param: {int} n, the number of periods
 	 */
-	return 0;
+	return principal * Math.pow(1 + i, n);
 }
 
 function futureValueC(principal, i, additions, n) {
@@ -57,7 +188,32 @@ function convert(amount, unit1, unit2) {
 	 * @param: {string} unit2, the unit to convert to
 	 * @see: conversions.json to find all of the compatible units
 	 */
+	// console.log(unit2);
+	if (unitTypes.Length.includes(unit1)) {
+		return amount * conversions.Length[unit1][unit2];
+	} else if (unitTypes.Area.includes(unit1)) {
+	} else if (unitTypes.Volume.includes(unit1)) {
+	} else if (unitTypes.Weight.includes(unit1)) {
+	} else if (unitTypes.Speed.includes(unit1)) {
+	} else if (unitTypes.Energy.includes(unit1)) {
+	} else if (unitTypes.Power.includes(unit1)) {
+	} else if (unitTypes.Time.includes(unit1)) {
+	} else if (unitTypes.Temperature.includes(unit1)) {
+	} else if (unitTypes.DataTransferRate.includes(unit1)) {
+	} else if (unitTypes.DigitalStorage.includes(unit1)) {
+	} else if (unitTypes.Pressure.includes(unit1)) {
+	} else if (unitTypes.FuelEconomy.includes(unit1)) {
+	}
 }
-
 function convertCurrency(amount, currency1, currency2) {}
 function convertFile(file, outputFormat) {}
+
+export {
+	convert,
+	convertCurrency,
+	convertFile,
+	futureValueC,
+	futureValueS,
+	presentValue,
+	presentValueA,
+};

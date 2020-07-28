@@ -1,24 +1,33 @@
 <template>
-  <div id="unitConverter">
-    <select id="typeSelector" v-model="currentUnitType">
-      <option v-for="(type,index) in convertibleUnits " :key="index">{{ type }}</option>
-    </select>
-    <div id="convertSection">
-      <input type="text" />
-      <select v-model="unit1">
-        <option v-for="(unit,index) in unitTypes[currentUnitType]" :key="index">{{ unit }}</option>
-      </select>
-      <Label>=</Label>
-      <input type="text" />
-      <select v-model="unit2">
-        <option v-for="unit in unitTypes[currentUnitType]" :key="unit">{{ unit }}</option>
-      </select>
-    </div>
-    <button>Convert</button>
-  </div>
+	<div id="unitConverter">
+		<select id="typeSelector" v-model="currentUnitType">
+			<option v-for="(type, index) in convertibleUnits" :key="index">{{
+				type
+			}}</option>
+		</select>
+		<div id="convertSection">
+			<input type="text" />
+			<select v-model="unit1">
+				<option
+					v-for="(unit, index) in unitTypes[currentUnitType]"
+					:key="index"
+					>{{ unit }}</option
+				>
+			</select>
+			<Label>=</Label>
+			<input type="text" />
+			<select v-model="unit2">
+				<option v-for="unit in unitTypes[currentUnitType]" :key="unit">{{
+					unit
+				}}</option>
+			</select>
+		</div>
+		<button>Convert</button>
+	</div>
 </template>
 
 <script>
+import convert from "../../../logic"
 export default {
   name: "unitConverter",
   data() {
@@ -49,7 +58,7 @@ export default {
           "kilometer",
           "light year",
           "inch",
-          "foott",
+          "foot",
           "yard",
           "mile",
           "nautical mile",
@@ -173,26 +182,29 @@ export default {
       },
       currentUnitType: "Length"
     };
+  },
+  created (){
+    console.log(convert(5,"picometer","picometer"));
   }
 };
 </script>
 
 <style scoped>
 #unitConverter {
-  background-color: #feeb6e;
+	background-color: #feeb6e;
 }
 #typeSelector {
-  display: block;
-  margin: auto;
-  background-color: #3cceff;
-  height: 50px;
-  width: 150px;
+	display: block;
+	margin: auto;
+	background-color: #3cceff;
+	height: 50px;
+	width: 150px;
 }
 button {
-  display: block;
-  margin: auto;
+	display: block;
+	margin: auto;
 }
 #convertSection {
-  margin: auto;
+	margin: auto;
 }
 </style>
