@@ -1,33 +1,33 @@
 <template>
-	<div id="unitConverter">
-		<select id="typeSelector" v-model="currentUnitType">
-			<option v-for="(type, index) in convertibleUnits" :key="index">{{
-				type
-			}}</option>
-		</select>
-		<div id="convertSection">
-			<input type="text" />
-			<select v-model="unit1">
-				<option
-					v-for="(unit, index) in unitTypes[currentUnitType]"
-					:key="index"
-					>{{ unit }}</option
-				>
-			</select>
-			<Label>=</Label>
-			<input type="text" />
-			<select v-model="unit2">
-				<option v-for="unit in unitTypes[currentUnitType]" :key="unit">{{
-					unit
-				}}</option>
-			</select>
-		</div>
-		<button>Convert</button>
-	</div>
+  <div id="unitConverter">
+    <select id="typeSelector" v-model="currentUnitType">
+      <option v-for="(type, index) in convertibleUnits" :key="index">
+        {{
+        type
+        }}
+      </option>
+    </select>
+    <div id="convertSection">
+      <input v-model="inputValue" type="number" />
+      <select v-model="unit1">
+        <option v-for="(unit, index) in unitTypes[currentUnitType]" :key="index">{{ unit }}</option>
+      </select>
+      <Label>=</Label>
+      <input v-model="outputValue" readonly type="text" />
+      <select v-model="unit2">
+        <option v-for="unit in unitTypes[currentUnitType]" :key="unit">
+          {{
+          unit
+          }}
+        </option>
+      </select>
+    </div>
+    <button @click="calculate">Convert</button>
+  </div>
 </template>
 
 <script>
-import convert from "../../../logic"
+import { convert } from "../../../logic";
 export default {
   name: "unitConverter",
   data() {
@@ -41,10 +41,11 @@ export default {
         "Energy",
         "Power",
         "Time",
+        "Temperature",
         "Data Transfer Rate",
         "Digital Storage",
         "Pressure",
-        "Fuel Economy"
+        "Fuel Economy",
       ],
       unitTypes: {
         Length: [
@@ -63,7 +64,7 @@ export default {
           "mile",
           "nautical mile",
           "parsec",
-          "astronomical unit"
+          "astronomical unit",
         ],
         Area: [
           "square millimeters",
@@ -75,7 +76,7 @@ export default {
           "square yards",
           "square miles",
           "acres",
-          "hectares"
+          "hectares",
         ],
         Volume: [
           "cc",
@@ -90,7 +91,7 @@ export default {
           "cubic inch",
           "cubic feet",
           "teaspoon",
-          "tablespoon"
+          "tablespoon",
         ],
         Weight: [
           "ounce",
@@ -100,14 +101,14 @@ export default {
           "gram",
           "kilogram",
           "metric ton",
-          "stone"
+          "stone",
         ],
         Speed: [
           "meters per second",
           "kilometers per hour",
           "miles per hour",
           "feet per second",
-          "knots"
+          "knots",
         ],
         Energy: [
           "joule",
@@ -118,7 +119,7 @@ export default {
           "BTU",
           "kWh",
           "MWh",
-          "tonnes of TNT"
+          "tonnes of TNT",
         ],
         Power: ["watts", "kilowatts", "megawatts", "horsepower"],
         Time: [
@@ -132,9 +133,9 @@ export default {
           "years",
           "decades",
           "centuries",
-          "millennia"
+          "millennia",
         ],
-        Temperature: ["Celsius", "Fahrenhiet", "Kelvin", "Rankine"],
+        Temperature: ["Celsius", "Fahrenheit", "Kelvin", "Rankine"],
         "Data Transfer Rate": [
           "bits per second",
           "bytes per second",
@@ -149,7 +150,7 @@ export default {
           "petabits per second",
           "petabytes per second",
           "exabits per second",
-          "exabytes per second"
+          "exabytes per second",
         ],
         "Digital Storage": [
           "bits",
@@ -165,46 +166,52 @@ export default {
           "petabits",
           "petabytes",
           "exabits",
-          "exabytes"
+          "exabytes",
         ],
         Pressure: [
           "pascal",
           "bar",
           "torr",
           "atmospheres",
-          "pounds per square inch"
+          "pounds per square inch",
         ],
         "Fuel Economy": [
           "miles per gallon",
           "kilometers per liter",
-          "liters per 100km"
-        ]
+          "liters per 100km",
+        ],
       },
-      currentUnitType: "Length"
+      currentUnitType: "Length",
+      unit1: "picometer",
+      unit2: "picometer",
+      inputValue: null,
+      outputValue: null,
     };
   },
-  created (){
-    console.log(convert(5,"picometer","picometer"));
-  }
+  methods: {
+    calculate() {
+      this.outputValue = convert(this.inputValue, this.unit1, this.unit2);
+    },
+  },
 };
 </script>
 
 <style scoped>
 #unitConverter {
-	background-color: #feeb6e;
+  background-color: #feeb6e;
 }
 #typeSelector {
-	display: block;
-	margin: auto;
-	background-color: #3cceff;
-	height: 50px;
-	width: 150px;
+  display: block;
+  margin: auto;
+  background-color: #3cceff;
+  height: 50px;
+  width: 150px;
 }
 button {
-	display: block;
-	margin: auto;
+  display: block;
+  margin: auto;
 }
 #convertSection {
-	margin: auto;
+  margin: auto;
 }
 </style>
