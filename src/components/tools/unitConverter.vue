@@ -1,33 +1,55 @@
+<style scoped>
+#unitConverter {
+  background-color: #feeb6e;
+}
+
+#typeSelector {
+  display: block;
+  margin: auto;
+  background-color: #3cceff;
+  height: 50px;
+  width: 150px;
+}
+
+button {
+  display: block;
+  margin: auto;
+}
+
+#convertSection {
+  margin: auto;
+}
+</style>
+
 <template>
-  <div id="unitConverter">
-    <select id="typeSelector" v-model="currentUnitType">
-      <option v-for="(type, index) in convertibleUnits" :key="index">
-        {{
-        type
-        }}
+<div id="unitConverter">
+  <select id="typeSelector" v-model="currentUnitType">
+    <option v-for="(type, index) in convertibleUnits" :key="index">
+      {{ type }}
+    </option>
+  </select>
+  <div id="convertSection">
+    <input v-model="inputValue" type="number" />
+    <select v-model="unit1">
+      <option v-for="(unit, index) in unitTypes[currentUnitType]" :key="index">{{ unit }}</option>
+    </select>
+    <Label>=</Label>
+    <input v-model="outputValue" readonly type="text" />
+    <select v-model="unit2">
+      <option v-for="unit in unitTypes[currentUnitType]" :key="unit">
+        {{ unit }}
       </option>
     </select>
-    <div id="convertSection">
-      <input v-model="inputValue" type="number" />
-      <select v-model="unit1">
-        <option v-for="(unit, index) in unitTypes[currentUnitType]" :key="index">{{ unit }}</option>
-      </select>
-      <Label>=</Label>
-      <input v-model="outputValue" readonly type="text" />
-      <select v-model="unit2">
-        <option v-for="unit in unitTypes[currentUnitType]" :key="unit">
-          {{
-          unit
-          }}
-        </option>
-      </select>
-    </div>
-    <button @click="calculate">Convert</button>
   </div>
+  <button @click="calculate">Convert</button>
+</div>
 </template>
 
 <script>
-import { convert } from "../../../logic";
+import {
+  convert
+}
+from "../../../logic";
 export default {
   name: "unitConverter",
   data() {
@@ -195,23 +217,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-#unitConverter {
-  background-color: #feeb6e;
-}
-#typeSelector {
-  display: block;
-  margin: auto;
-  background-color: #3cceff;
-  height: 50px;
-  width: 150px;
-}
-button {
-  display: block;
-  margin: auto;
-}
-#convertSection {
-  margin: auto;
-}
-</style>

@@ -20,7 +20,7 @@ export function futureValueS(principal, i, n) {
    * @param: {float} i, the interest rate per period
    * @param: {int} n, the number of periods
    */
-  return principal + principal * i * n;
+  return parseFloat(principal) + principal * i * n;
 }
 
 export function futureValueC(principal, i, additions, n) {
@@ -34,13 +34,14 @@ export function futureValueC(principal, i, additions, n) {
    * @param: {int} additions, the amount deposited each period
    * @param: {int} n, the number of periods
    */
-  total = 0;
+  let total = 0;
   if (principal) {
     total += principal * Math.pow(1 + i, n)
   }
   if (additions) {
     total += additions * (Math.pow(1 + i, n) - 1) / i
   }
+  return total
 }
 
 export function presentValue(fv, i, n) {
