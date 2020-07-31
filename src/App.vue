@@ -1,28 +1,27 @@
 <template>
-  <div id="app">
+  <div id ="App">
     <usefultoolsHeader></usefultoolsHeader>
-    <div>
-      <navbar v-on:switch-to="changeComponent($event)"></navbar>
-    </div>
-    <div>
+    <navbar v-on:switch-to="changeComponent($event)"></navbar>
     <tool v-bind:currComponent="currentComponent"></tool>
-    </div>
     <usefultoolsFooter id="footerDiv"></usefultoolsFooter>
-  </div>
+    <testComponent></testComponent>
+    </div>
 </template>
 
 <script>
-import usefultoolsHeader from "./components/usefultoolsHeader.vue";
+import usefultoolsHeader from "./components/usefultoolsHeader";
 import navbar from "./components/navbar";
 import tool from "./components/tool";
 import usefultoolsFooter from "./components/usefultoolsFooter";
+import testComponent from "./components/testComponent"
 export default {
   name: "App",
   components: {
     usefultoolsHeader,
     navbar,
     tool,
-    usefultoolsFooter
+    usefultoolsFooter,
+    testComponent
   },
   data: function() {
     return {
