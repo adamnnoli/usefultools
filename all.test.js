@@ -25,3 +25,6 @@ test.each([
 ])('%d %s = %d %s', (value, unit1, expected, unit2) => {
   expect(logic.convert(value, unit1, unit2)).toBeCloseTo(expected, 2);
 });
+test("Currency Converter", async () => {
+  expect(await logic.convertCurrency(1, "USD","CAD")).toBeCloseTo(1.34,2);
+})

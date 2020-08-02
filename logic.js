@@ -1,6 +1,8 @@
 import {
   conversions
 } from "./conversions.js";
+const fetch = require("node-fetch")
+
 /**
  * Need functions for, simple interest no additions
  * compound interest
@@ -20,7 +22,8 @@ export function futureValueS(principal, i, n) {
    * @param: {float} i, the interest rate per period
    * @param: {int} n, the number of periods
    */
-  return parseFloat(principal) + principal * i * n;
+  let result = parseFloat(principal) + principal * i * n
+  return result.toFixed(2);
 }
 
 export function futureValueC(principal, i, additions, n) {
@@ -41,7 +44,7 @@ export function futureValueC(principal, i, additions, n) {
   if (additions) {
     total += additions * (Math.pow(1 + i, n) - 1) / i
   }
-  return total
+  return total.toFixed(2)
 }
 
 export function presentValue(fv, i, n) {
@@ -53,7 +56,8 @@ export function presentValue(fv, i, n) {
    * @param: {float} i, the interest rate per period
    * @param: {int} n, the number of periods
    */
-  return fv / Math.pow(1 + i, n);
+  let result = fv / Math.pow(1 + i, n);
+  return result.toFixed(2);
 }
 
 export function presentValueA(amount, i, n) {
@@ -64,7 +68,8 @@ export function presentValueA(amount, i, n) {
    * @param: {float} i, the interest rate per period
    * @param: {int} n, the number of periods
    */
-  return amount * ((1 - Math.pow(1 + i, -n)) / i);
+  let result = amount * ((1 - Math.pow(1 + i, -n)) / i);
+  return result.toFixed(2)
 }
 
 export function convert(amount, unit1, unit2) {
@@ -145,5 +150,17 @@ export function convert(amount, unit1, unit2) {
       break;
   }
 }
-// export function convertCurrency(amount, currency1, currency2) {}
+
+
+export async function convertCurrency(amount, currency1, currency2) {
+  /**Returns the value of amount converted from currency1 to currency2
+    I.e. if 1 USD = 1.25 EUR then convertCurrency(5, USD, EUR) returns 6.25
+    @param: {float} amount, the amount of currency1
+    @param: {string} currency1, the currency to convert from
+    @param: {string} currency2, the currency to convert to
+   */
+  let response = await fetch(`https://api.exchangeratesapi.io/latest?base=${currency1}`);
+  let data = await response.json();
+  return data["rates"][currency2] * amount
+}
 // export function convertFile(file, outputFormat) {}
