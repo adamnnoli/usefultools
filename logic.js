@@ -3,39 +3,24 @@ import {
 } from "./conversions.js";
 const fetch = require("node-fetch")
 
-/**
- * Need functions for, simple interest no additions
- * compound interest
- * compound interest with additions
- * present value of principal
- * present value of annuity
- * present value of principal and annuity
- *
- */
-
 export function futureValueS(principal, i, n) {
-  /**
-   * Returns the value of principal with a simple interest rate of i per period after n
-   * periods
-   *
-   * @param: {int} principal, the initial amount
-   * @param: {float} i, the interest rate per period
-   * @param: {int} n, the number of periods
+  /**Returns the value of principal with a simple interest rate of i per period after n
+   periods
+   @param: {int} principal, the initial amount
+   @param: {float} i, the interest rate per period
+   @param: {int} n, the number of periods
    */
   let result = parseFloat(principal) + principal * i * n
   return result.toFixed(2);
 }
 
 export function futureValueC(principal, i, additions, n) {
-  /**
-   * Returns the value of principal after n periods with i interest rate compounded each period,
-   * and additions added to principal each period
-   *  Additions added at the beginning of each period
-   *
-   * @param: {int} principal, the initial deposit
-   * @param: {float} i, the interest rate per period
-   * @param: {int} additions, the amount deposited each period
-   * @param: {int} n, the number of periods
+  /**Returns the value of principal after n periods with i interest rate compounded each period,
+   and additions added to principal each period
+   @param: {int} principal, the initial deposit
+   @param: {float} i, the interest rate per period
+   @param: {int} additions, the amount deposited each period
+   @param: {int} n, the number of periods
    */
   let total = 0;
   if (principal) {
@@ -48,39 +33,34 @@ export function futureValueC(principal, i, additions, n) {
 }
 
 export function presentValue(fv, i, n) {
-  /**
-   * Returns the present value of fv, with an interest rate of i per period over n periods,
-   * compounded c times per period
-   *
-   * @param: {int} fv, the amount received in the future
-   * @param: {float} i, the interest rate per period
-   * @param: {int} n, the number of periods
+  /**Returns the present value of fv, with an interest rate of i per period over n periods,
+   compounded c times per period
+   @param: {int} fv, the amount received in the future
+   @param: {float} i, the interest rate per period
+   @param: {int} n, the number of periods
    */
   let result = fv / Math.pow(1 + i, n);
   return result.toFixed(2);
 }
 
 export function presentValueA(amount, i, n) {
-  /**
-   * Returns the present value of an annuity, receiving amount per period with an interest rate of
-   * i per period, over n periods
-   * @param: {int} amount, the amount received each period
-   * @param: {float} i, the interest rate per period
-   * @param: {int} n, the number of periods
+  /**Returns the present value of an annuity, receiving amount per period with an interest rate of
+   i per period, over n periods
+   @param: {int} amount, the amount received each period
+   @param: {float} i, the interest rate per period
+   @param: {int} n, the number of periods
    */
   let result = amount * ((1 - Math.pow(1 + i, -n)) / i);
   return result.toFixed(2)
 }
 
 export function convert(amount, unit1, unit2) {
-  /**
-   * Returns the value of amount converted from unit1 to unit2
-   * I.e. convert(5, kilograms, pounds) returns 11.0231
-   *
-   * @param: {float} amount, the amount of unit1
-   * @param: {string} unit1, the unit to convert from
-   * @param: {string} unit2, the unit to convert to
-   * @see: conversions.json to find all of the compatible units
+  /**Returns the value of amount converted from unit1 to unit2
+   I.e. convert(5, kilograms, pounds) returns 11.0231
+   @param: {float} amount, the amount of unit1
+   @param: {string} unit1, the unit to convert from
+   @param: {string} unit2, the unit to convert to
+   @see: conversions.json to find all of the compatible units
    */
   //Convert Between Standard Units i.e. 1 unit1 = x unit2
   for (let category in conversions) {
@@ -151,7 +131,6 @@ export function convert(amount, unit1, unit2) {
   }
 }
 
-
 export async function convertCurrency(amount, currency1, currency2) {
   /**Returns the value of amount converted from currency1 to currency2
     I.e. if 1 USD = 1.25 EUR then convertCurrency(5, USD, EUR) returns 6.25
@@ -161,6 +140,9 @@ export async function convertCurrency(amount, currency1, currency2) {
    */
   let response = await fetch(`https://api.exchangeratesapi.io/latest?base=${currency1}`);
   let data = await response.json();
-  return data["rates"][currency2] * amount
+  let result = data["rates"][currency2] * amount
+  return result.toFixed(2)
 }
+
+
 // export function convertFile(file, outputFormat) {}
