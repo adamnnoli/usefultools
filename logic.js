@@ -54,21 +54,41 @@ export function presentValueA(amount, i, n) {
   return result.toFixed(2)
 }
 
-export function convert(amount, unit1, unit2) {
-  /**Returns the value of amount converted from unit1 to unit2
-   I.e. convert(5, kilograms, pounds) returns 11.0231
-   @param: {float} amount, the amount of unit1
-   @param: {string} unit1, the unit to convert from
-   @param: {string} unit2, the unit to convert to
-   @see: conversions.json to find all of the compatible units
-   */
-  //Convert Between Standard Units i.e. 1 unit1 = x unit2
-  for (let category in conversions) {
-    if (unit1 in conversions[category]) {
-      return amount * conversions[category][unit1][unit2];
-    }
+function convertFuelEconomy(amount, unit1, unit2) {
+  switch (unit1) {
+    case "miles per gallon":
+      switch (unit2) {
+        case "miles per gallon":
+          return amount;
+        case "liters per 100km":
+          return 235.2145833 / amount;
+        case "kilometers per liter":
+          return 0.42514370749052 * amount;
+      }
+      break;
+    case "liters per 100km":
+      switch (unit2) {
+        case "miles per gallon":
+          return 235.2145833 / amount;
+        case "liters per 100km":
+          return amount;
+        case "kilometers per liter":
+          return 100 / amount;
+      }
+      break;
+    case "kilometers per liter":
+      switch (unit2) {
+        case "miles per gallon":
+          return 2.352145833 * amount;
+        case "liters per 100km":
+          return 100 / amount;
+        case "kilometers per liter":
+          return amount;
+      }
   }
-  //Check Temperature Conversions (Separate Because these are formulas)
+}
+
+function convertTemperature(amount, unit1, unit2) {
   switch (unit1) {
     case "Fahrenheit":
       switch (unit2) {
@@ -131,6 +151,28 @@ export function convert(amount, unit1, unit2) {
   }
 }
 
+export function convert(amount, unit1, unit2) {
+  /**Returns the value of amount converted from unit1 to unit2
+   I.e. convert(5, kilograms, pounds) returns 11.0231
+   @param: {float} amount, the amount of unit1
+   @param: {string} unit1, the unit to convert from
+   @param: {string} unit2, the unit to convert to
+   @see: conversions.json to find all of the compatible units
+   */
+  //Convert Between Standard Units i.e. 1 unit1 = x unit2
+  for (let category in conversions) {
+    if (unit1 in conversions[category]) {
+      return amount * conversions[category][unit1][unit2];
+    }
+  }
+  if (["Rankine", "Fahrenheit", "Celsius", "Kelvin"].includes(unit1)) {
+    return convertTemperature(amount, unit1, unit2);
+  } else if (["miles per gallon", "liters per 100km", "kilometers per liter"].includes(unit1)) {
+    return convertFuelEconomy(amount, unit1, unit2);
+  }
+
+}
+
 export async function convertCurrency(amount, currency1, currency2) {
   /**Returns the value of amount converted from currency1 to currency2
     I.e. if 1 USD = 1.25 EUR then convertCurrency(5, USD, EUR) returns 6.25
@@ -144,5 +186,18 @@ export async function convertCurrency(amount, currency1, currency2) {
   return result.toFixed(2)
 }
 
-
-// export function convertFile(file, outputFormat) {}
+export async function convertFile(file, outputFormat) {
+  let response = await fetch("http://api.convertio.co/convert", {
+    body: {
+      "apikey": process.env.CONVERTIO_KEY,
+      "file": file,
+      "outputformat": outputFormat
+    },
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    method: "POST"
+  });
+  let data = await response.json()
+  console.log(data);
+}
